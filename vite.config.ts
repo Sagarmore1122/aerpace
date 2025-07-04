@@ -5,7 +5,13 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
- root: '.', // or 'src' if that's your setup
+  plugins: [react(), componentTagger()],
+  root: '.', // keep this if your index.html is in root
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'), // ✅ this fixes the "@/..." import
+    },
+  },
   build: {
     rollupOptions: {
       input: 'index.html',
